@@ -1,0 +1,12 @@
+/* index.css - Global base styles. MUI handles component-level styling. */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
