@@ -42,7 +42,7 @@ function App() {
     };
 
     return (
-        <Box sx={{ flexGrow: 1, minHeight: '100vh', bgcolor: '#f5f5f5' }}>
+        <Box sx={{ flexGrow: 1, minHeight: '100vh' }}>
             {/* Navigation bar is always visible at the top */}
             <NavBar currentPage={currentPage} onNavigate={setCurrentPage} />
             <Container maxWidth='md' sx={{ mt: 4, pb: 4 }}>

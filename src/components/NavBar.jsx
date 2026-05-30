@@ -2,8 +2,7 @@
 // Top navigation bar for the Cost Manager application.
 // Renders the app title and tab-based navigation links.
 
-import { AppBar, Toolbar, Typography, Tabs, Tab } from '@mui/material';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { AppBar, Toolbar, Tabs, Tab, Typography } from '@mui/material';
 
 // Navigation tab definitions with display labels and route keys
 const NAV_TABS = [
@@ -25,12 +24,37 @@ function NavBar({ currentPage, onNavigate }) {
     };
 
     return (
-        <AppBar position='static'>
-            <Toolbar>
-                {/* Application icon and title */}
-                <AttachMoneyIcon sx={{ mr: 1 }} />
-                <Typography variant='h6' sx={{ mr: 4, fontWeight: 700 }}>
-                    Cost Manager
+        <AppBar
+            position='static'
+            elevation={0}
+            sx={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: 'none'
+            }}
+        >
+            <Toolbar sx={{ gap: 1 }}>
+                <Typography
+                    sx={{
+                        mr: 3,
+                        fontFamily: '"Oxanium", "Inter", sans-serif',
+                        fontWeight: 700,
+                        fontSize: '1.75rem',
+                        letterSpacing: '0.06em',
+                        color: '#fff',
+                        userSelect: 'none',
+                        textTransform: 'uppercase',
+                        textShadow: `
+                            0 0 6px rgba(255, 255, 255, 1),
+                            0 0 14px rgba(255, 255, 255, 0.85),
+                            0 0 28px rgba(255, 255, 255, 0.65),
+                            0 0 55px rgba(255, 255, 255, 0.35)
+                        `
+                    }}
+                >
+                    Spendly
                 </Typography>
 
                 {/* Navigation tabs aligned to the right of the title */}
@@ -38,12 +62,25 @@ function NavBar({ currentPage, onNavigate }) {
                     value={currentPage}
                     onChange={handleChange}
                     textColor='inherit'
-                    indicatorColor='secondary'
+                    TabIndicatorProps={{
+                        style: { backgroundColor: '#90caf9', height: 3, borderRadius: '3px 3px 0 0' }
+                    }}
                     variant='scrollable'
                     scrollButtons='auto'
                 >
                     {NAV_TABS.map(tab => (
-                        <Tab key={tab.value} label={tab.label} value={tab.value} />
+                        <Tab
+                            key={tab.value}
+                            label={tab.label}
+                            value={tab.value}
+                            sx={{
+                                letterSpacing: '0.04em',
+                                fontWeight: 500,
+                                opacity: 0.72,
+                                px: 2,
+                                '&.Mui-selected': { opacity: 1, fontWeight: 600 }
+                            }}
+                        />
                     ))}
                 </Tabs>
             </Toolbar>

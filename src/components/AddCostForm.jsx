@@ -80,9 +80,9 @@ function AddCostForm({ dbInstance }) {
     };
 
     return (
-        <Card elevation={3}>
-            <CardContent>
-                <Typography variant='h5' gutterBottom fontWeight={600}>
+        <Card elevation={0}>
+            <CardContent sx={{ p: 4, '&:last-child': { pb: 4 } }}>
+                <Typography variant='h5' gutterBottom>
                     Add New Cost
                 </Typography>
 

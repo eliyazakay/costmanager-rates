@@ -19,10 +19,9 @@ const MONTH_NAMES = [
     'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-// Distinct colors assigned to each pie slice
 const SLICE_COLORS = [
-    '#1565c0', '#e53935', '#2e7d32', '#f57c00',
-    '#6a1b9a', '#00838f', '#ad1457', '#4e342e'
+    '#64b5f6', '#ef5350', '#66bb6a', '#ffa726',
+    '#ab47bc', '#26c6da', '#ec407a', '#8d6e63'
 ];
 
 // Build a list of recent years for the year selector
@@ -101,10 +100,10 @@ function PieChartView({ dbName }) {
     };
 
     return (
-        <Card elevation={3}>
-            <CardContent>
-                <Typography variant='h5' gutterBottom fontWeight={600}>
-                    Costs by Category — Pie Chart
+        <Card elevation={0}>
+            <CardContent sx={{ p: 4, '&:last-child': { pb: 4 } }}>
+                <Typography variant='h5' gutterBottom>
+                    Costs by Category - Pie Chart
                 </Typography>
 
                 {/* Selectors row */}
@@ -154,7 +153,7 @@ function PieChartView({ dbName }) {
                         variant='contained'
                         onClick={handleGetChart}
                         disabled={loading}
-                        sx={{ alignSelf: 'center' }}
+                        sx={{ height: 56, whiteSpace: 'nowrap' }}
                     >
                         Show Chart
                     </Button>
@@ -187,11 +186,20 @@ function PieChartView({ dbName }) {
                                 cx='50%'
                                 cy='50%'
                                 outerRadius={140}
-                                label={({ name, percent }) =>
-                                    `${name} ${(percent * 100).toFixed(1)}%`
-                                }
+                                labelLine={{ stroke: 'rgba(255,255,255,0.4)' }}
+                                label={({ name, percent, x, y }) => (
+                                    <text
+                                        x={x}
+                                        y={y}
+                                        fill='rgba(255,255,255,0.9)'
+                                        textAnchor='middle'
+                                        dominantBaseline='central'
+                                        fontSize={12}
+                                    >
+                                        {`${name} ${(percent * 100).toFixed(1)}%`}
+                                    </text>
+                                )}
                             >
-                                {/* Assign a distinct color to each slice */}
                                 {chartData.map((entry, index) => (
                                     <Cell
                                         key={`cell-${index}`}
@@ -199,8 +207,21 @@ function PieChartView({ dbName }) {
                                     />
                                 ))}
                             </Pie>
-                            <Tooltip formatter={value => `${value} ${currency}`} />
-                            <Legend />
+                            <Tooltip
+                                formatter={value => `${value} ${currency}`}
+                                contentStyle={{
+                                    background: 'rgba(10, 20, 50, 0.92)',
+                                    border: '1px solid rgba(255,255,255,0.2)',
+                                    borderRadius: 8,
+                                    color: 'white'
+                                }}
+                                itemStyle={{ color: 'rgba(255,255,255,0.87)' }}
+                            />
+                            <Legend
+                                formatter={(value) => (
+                                    <span style={{ color: 'rgba(255,255,255,0.85)' }}>{value}</span>
+                                )}
+                            />
                         </PieChart>
                     </ResponsiveContainer>
                 )}

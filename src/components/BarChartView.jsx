@@ -7,6 +7,7 @@ import {
     Box, Button, Card, CardContent, CircularProgress,
     FormControl, InputLabel, MenuItem, Select, Typography, Alert
 } from '@mui/material';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid,
     Tooltip, ResponsiveContainer, Cell
@@ -22,8 +23,7 @@ const MONTH_LABELS = [
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
 
-// Bar fill color — uses the primary theme color
-const BAR_COLOR = '#1565c0';
+const BAR_COLOR = '#64b5f6';
 
 // Build a list of recent years for the year selector
 const buildYearOptions = () => {
@@ -74,11 +74,14 @@ function BarChartView({ dbName }) {
     };
 
     return (
-        <Card elevation={3}>
-            <CardContent>
-                <Typography variant='h5' gutterBottom fontWeight={600}>
-                    Monthly Totals — Bar Chart
-                </Typography>
+        <Card elevation={0}>
+            <CardContent sx={{ p: 4, '&:last-child': { pb: 4 } }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                    <BarChartIcon color='primary' sx={{ fontSize: 28 }} />
+                    <Typography variant='h5'>
+                        Monthly Totals - Bar Chart
+                    </Typography>
+                </Box>
 
                 {/* Selectors row: year and currency */}
                 <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
@@ -113,7 +116,7 @@ function BarChartView({ dbName }) {
                         variant='contained'
                         onClick={handleGetChart}
                         disabled={loading}
-                        sx={{ alignSelf: 'center' }}
+                        sx={{ height: 56, whiteSpace: 'nowrap' }}
                     >
                         Show Chart
                     </Button>
@@ -136,20 +139,37 @@ function BarChartView({ dbName }) {
                             data={chartData}
                             margin={{ top: 10, right: 30, left: 10, bottom: 5 }}
                         >
-                            <CartesianGrid strokeDasharray='3 3' />
-                            <XAxis dataKey='month' />
-                            {/* Y-axis label shows the selected currency */}
+                            <CartesianGrid strokeDasharray='3 3' stroke='rgba(255,255,255,0.08)' />
+                            <XAxis
+                                dataKey='month'
+                                tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 12 }}
+                                axisLine={{ stroke: 'rgba(255,255,255,0.2)' }}
+                                tickLine={{ stroke: 'rgba(255,255,255,0.2)' }}
+                            />
                             <YAxis
+                                tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 12 }}
+                                axisLine={{ stroke: 'rgba(255,255,255,0.2)' }}
+                                tickLine={{ stroke: 'rgba(255,255,255,0.2)' }}
                                 label={{
                                     value: currency,
                                     angle: -90,
                                     position: 'insideLeft',
-                                    offset: -5
+                                    offset: -5,
+                                    fill: 'rgba(255,255,255,0.6)'
                                 }}
                             />
-                            <Tooltip formatter={value => [`${value} ${currency}`, 'Total']} />
+                            <Tooltip
+                                formatter={value => [`${value} ${currency}`, 'Total']}
+                                contentStyle={{
+                                    background: 'rgba(10, 20, 50, 0.92)',
+                                    border: '1px solid rgba(255,255,255,0.2)',
+                                    borderRadius: 8,
+                                    color: 'white'
+                                }}
+                                itemStyle={{ color: 'rgba(255,255,255,0.87)' }}
+                                labelStyle={{ color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}
+                            />
                             <Bar dataKey='total' name='Total'>
-                                {/* Color every bar with the primary theme color */}
                                 {chartData.map((_, index) => (
                                     <Cell key={`bar-${index}`} fill={BAR_COLOR} />
                                 ))}

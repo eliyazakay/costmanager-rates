@@ -62,9 +62,9 @@ function MonthlyReport({ dbName }) {
     };
 
     return (
-        <Card elevation={3}>
-            <CardContent>
-                <Typography variant='h5' gutterBottom fontWeight={600}>
+        <Card elevation={0}>
+            <CardContent sx={{ p: 4, '&:last-child': { pb: 4 } }}>
+                <Typography variant='h5' gutterBottom>
                     Monthly Report
                 </Typography>
 
@@ -115,7 +115,7 @@ function MonthlyReport({ dbName }) {
                         variant='contained'
                         onClick={handleGetReport}
                         disabled={loading}
-                        sx={{ alignSelf: 'center' }}
+                        sx={{ height: 56, whiteSpace: 'nowrap' }}
                     >
                         Get Report
                     </Button>
@@ -167,7 +167,7 @@ function MonthlyReport({ dbName }) {
                         )}
 
                         {/* Total row displayed below the table */}
-                        <Box sx={{ mt: 2, p: 2, bgcolor: 'primary.main', color: 'white', borderRadius: 1 }}>
+                        <Box sx={{ mt: 2, p: 2, background: 'rgba(144, 202, 249, 0.15)', border: '1px solid rgba(144, 202, 249, 0.35)', borderRadius: 2 }}>
                             <Typography variant='h6'>
                                 Total: {reportData.total.sum} {reportData.total.currency}
                             </Typography>

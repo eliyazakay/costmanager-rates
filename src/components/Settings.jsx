@@ -49,9 +49,9 @@ function Settings() {
     };
 
     return (
-        <Card elevation={3}>
-            <CardContent>
-                <Typography variant='h5' gutterBottom fontWeight={600}>
+        <Card elevation={0}>
+            <CardContent sx={{ p: 4, '&:last-child': { pb: 4 } }}>
+                <Typography variant='h5' gutterBottom>
                     Settings
                 </Typography>
 
@@ -86,7 +86,7 @@ function Settings() {
                     <Button
                         variant='contained'
                         onClick={handleSave}
-                        sx={{ mt: 1, whiteSpace: 'nowrap' }}
+                        sx={{ mt: 1, height: 56, whiteSpace: 'nowrap' }}
                     >
                         Save & Refresh
                     </Button>
